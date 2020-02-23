@@ -1,84 +1,33 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { generateGrid } from '../../store/actions/rootActions';
 
-const HeaderContainer = styled.div`
-  width: 100%;
-  background-color: #f1f1f1;
-  display: flex;
-  border-radius: 6px;
-  margin-bottom: 50px;
-`
-const InputBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  &&:first-child {
-    margin-left: 25px;
-  }
-`
-const Label = styled.label`
-  font-size: 14px;
-  color: #949494;
-`
-const Input = styled.input`
-  width: 30px;
-  padding: 7px 15px;
-  border: 1px solid #BBB;
-  border-radius: 4px;
-  font-size: 18px;
-  &&:focus {
-    outline: none;
-  }
-  &&::placeholder {
-    color: black;
-  }
-`
-const X = styled.div`
-  margin: auto 0;
-  position: relative;
-  top: 8px;
-`
-
-const GenerateButton = styled.button`
-    margin: auto 0;
-    position: relative;
-    top: 8px;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    background-color: #4A90E2;
-    color: white;
-    &&:hover {
-        background-color: #76B5FF;
-    }
-    &&:focus {
-        outline: none;
-    }
-    &&:active {
-        background-color: #235896;
-        position: relative;
-        top: 9px;
-        left: 1px;
-    }
-`
+import HeaderContainer from '../../components/Header/Container'
+import InputBlock from '../../components/Header/InputBlock'
+import Label from '../../components/Header/Label'
+import Input from '../../components/Header/Input'
+import XSign from '../../components/Header/XSign'
+import GenerateButton from '../../components/Header/GenerateButton'
 
 const Header = () => {
+  const rows = useSelector(state => state.rows)
+  const columns = useSelector(state => state.columns)
+  const [currentRows, setCurrentRows] = useState(rows)
+  const [currentColumns, setCurrentColumns] = useState(columns)
+  const dispatch = useDispatch();
+  
   return (
     <HeaderContainer>
       <InputBlock>
-        <Label for="Rows">Rows</Label>
-        <Input placeholder='10'  max="20" name="Rows" />
+        <Label htmlFor="Rows">Rows</Label>
+        <Input value={currentRows} max="20" name="Rows" onChange={e => setCurrentRows(e.target.value)}/>
       </InputBlock>
-      <X>
-        x
-      </X>
+      <XSign>x</XSign>
       <InputBlock>
-        <Label for="Columns">Columns</Label>
-        <Input placeholder='10' max="20" name="Columns" />
+        <Label htmlFor="Columns">Columns</Label>
+        <Input value={currentColumns} max="20" name="Columns" onChange={e => setCurrentColumns(e.target.value)}/>
       </InputBlock>
-      <GenerateButton>
-        Generate
-      </GenerateButton>
+      <GenerateButton onClick={() => dispatch(generateGrid(currentRows, currentColumns))}>Generate</GenerateButton>
     </HeaderContainer>
   )
 }
