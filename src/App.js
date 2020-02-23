@@ -1,16 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
+import Logo from './components/Logo/Logo'
+import Header from './containers/Header/Header'
+import Grid from './containers/Grid/Grid'
 
-const Title = styled.h1`
-    color: red;
-`;
+const Container = styled.div`
+  width: 30%;
+  margin: auto;
+`
 
 const App = () => {
-    return (
-        <div>
-            <Title>Labas!</Title>
-        </div>
-    );
+  return (
+    <Container>
+      <Logo/>
+      <Header/>
+      <Grid/>
+    </Container>
+  )
 }
 
-export default App;
+export default App
