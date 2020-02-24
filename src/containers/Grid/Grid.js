@@ -36,9 +36,17 @@ const Grid = () => {
 
   const startOrEnd = position =>
     isEqualPositions(startPosition, position) ? (
-      <SpecialSquare type="start" columns={columns.length} />
+      <SpecialSquare
+        type="start"
+        columns={columns.length}
+        key={`${position[0]}-${position[1]}`}
+      />
     ) : (
-      <SpecialSquare type="end" columns={columns.length} />
+      <SpecialSquare
+        type="end"
+        columns={columns.length}
+        key={`${position[0]}-${position[1]}`}
+      />
     );
 
   return rows.map((item, rowIndex) => (

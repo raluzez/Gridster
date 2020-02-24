@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  border: 1px solid #e2e2e2;
+  border: 1px solid;
   background-color: ${props =>
     props.type === 'start' ? '#7ED321' : '#639530'};
   border-color: ${props => (props.type === 'start' ? '#7ED321' : '#639530')};
