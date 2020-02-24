@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import gridsterLogo from '../../Assets/Gridster-Logo.png'
+import gridsterLogo from '../../assets/Gridster-Logo.png'
 
 export default styled.img.attrs(() => ({
   src: `${gridsterLogo}`
