@@ -6,7 +6,7 @@ import PathSquare from '../../components/Grid/PathSquare';
 import RowContainer from '../../components/Grid/RowContainer';
 import { isEqualPositions } from '../../helpers/isEqualPositions';
 import { fillSquare, clearSquare, findPath } from '../../store/actions/rootActions';
-import { customBFS } from '../../helpers/customPathFinder';
+import { customBFS } from '../../helpers/customBFS';
 
 const MemoSqaure = memo(Square);
 const MemoSpecialSquare = memo(SpecialSquare);
@@ -26,52 +26,41 @@ const Grid = () => {
       ? 'clear'
       : 'filled';
 
-  const squareToggler = position =>
-    clearSquaresList.find(clearSquare => isEqualPositions(clearSquare, position))
-      ? dispatch(fillSquare(position))
-      : dispatch(clearSquare(position));
+  const squareToggler = (x, y) => {
+    if (clearSquaresList.find(clearSquare => isEqualPositions(clearSquare, [x, y]))) {
+      dispatch(fillSquare([x, y]));
+      dispatch(findPath(customBFS(clearSquaresList, startPosition, endPosition, [x, y])));
+    } else {
+      dispatch(clearSquare([x, y]));
+      dispatch(findPath(customBFS(clearSquaresList, startPosition, endPosition, [x, y], 'clear')));
+    }
+  };
 
-  const squareComponentHandler = position => {
+  const squareComponentHandler = (x, y) => {
     let square;
     switch (true) {
-      case isEqualPositions(startPosition, position):
+      case isEqualPositions(startPosition, [x, y]):
+        square = <MemoSpecialSquare type="start" columns={columns.length} key={`${x}-${y}`} />;
+        break;
+      case isEqualPositions(endPosition, [x, y]):
+        square = <MemoSpecialSquare type="end" columns={columns.length} key={`${x}-${y}`} />;
+        break;
+      case !!pathSquaresList.find(pathSquare => isEqualPositions(pathSquare, [x, y])):
         square = (
-          <MemoSpecialSquare
-            type="start"
+          <MemoPathSquare
             columns={columns.length}
-            key={`${position[0]}-${position[1]}`}
+            key={`${x}-${y}`}
+            onClick={() => squareToggler(x, y)}
           />
         );
-        break;
-      case isEqualPositions(endPosition, position):
-        square = (
-          <MemoSpecialSquare
-            type="end"
-            columns={columns.length}
-            key={`${position[0]}-${position[1]}`}
-          />
-        );
-        break;
-      case !!pathSquaresList.find(pathSquare => isEqualPositions(pathSquare, position)):
-        square = <MemoPathSquare columns={columns.length} key={`${position[0]}-${position[1]}`} />;
         break;
       default:
         square = (
           <MemoSqaure
-            key={`${position[0]}-${position[1]}`}
+            key={`${x}-${y}`}
             columns={columns.length}
-            type={squareTypeHandler([position[0], position[1]])}
-            onClick={() => {
-              squareToggler([position[0], position[1]]);
-              dispatch(
-                findPath(
-                  customBFS(clearSquaresList, startPosition, endPosition, [
-                    position[0],
-                    position[1],
-                  ])
-                )
-              );
-            }}
+            type={squareTypeHandler([x, y])}
+            onClick={() => squareToggler(x, y)}
           />
         );
     }
@@ -80,7 +69,7 @@ const Grid = () => {
 
   return rows.map((item, rowIndex) => (
     <RowContainer key={rowIndex}>
-      {columns.map((item, columnIndex) => squareComponentHandler([columnIndex, rowIndex]))}
+      {columns.map((item, columnIndex) => squareComponentHandler(columnIndex, rowIndex))}
     </RowContainer>
   ));
 };

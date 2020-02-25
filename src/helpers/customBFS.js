@@ -12,10 +12,15 @@ function Square(position) {
   this.parent = null;
 }
 
-export const customBFS = (clearSquaresList, start, end, position) => {
+export const customBFS = (clearSquaresList, start, end, position, isClear) => {
   const endSquare = new Square(end);
   const startSquare = new Square(start);
-  clearSquaresList = [...clearSquaresList, position, end];
+  isClear
+    ? (clearSquaresList = [...clearSquaresList, position, end])
+    : (clearSquaresList = [
+        ...clearSquaresList.filter(square => !isEqualPositions(square, position)),
+        end,
+      ]);
   const clearSquares = clearSquaresList.map(position => new Square(position));
   let queue = [];
   const path = [];

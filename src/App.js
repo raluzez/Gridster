@@ -7,6 +7,13 @@ import Grid from './containers/Grid/Grid';
 const Container = styled.div`
   width: 30%;
   margin: auto;
+  font-family: 'Comfortaa', serif;
+  @media (max-width: 1270px) {
+    width: 50%;
+  }
+  @media (max-width: 775px) {
+    width: 75%;
+  }
 `;
 
 const App = () => {
