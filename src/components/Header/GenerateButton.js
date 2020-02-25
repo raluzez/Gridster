@@ -29,7 +29,7 @@ export default styled.button`
     padding: 7.5px 14px;
     font-size: 15px;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 419px) {
     margin-top: -24px;
   }
 `;

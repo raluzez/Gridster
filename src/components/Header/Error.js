@@ -11,7 +11,7 @@ export default styled.div`
     padding-bottom: 0;
     font-size: 14px;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 419px) {
     padding: 15px;
     padding-bottom: 0;
     font-size: 12px;

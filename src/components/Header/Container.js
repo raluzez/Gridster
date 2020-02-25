@@ -7,7 +7,7 @@ export default styled.div`
   flex-wrap: wrap;
   border-radius: 6px;
   margin-bottom: 50px;
-  @media (max-width: 425px) {
+  @media (max-width: 419px) {
     justify-content: space-around;
     height: 140px;
     margin-bottom: 30px;

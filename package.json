@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
-    "test": "jest"
+    "build": "webpack --mode production"
   },
   "author": "Lukas Laurinavicius",
   "homepage": "https://raluzez.github.io/Gridster",

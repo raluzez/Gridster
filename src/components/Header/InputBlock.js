@@ -13,7 +13,7 @@ export default styled.div`
       margin-left: 20px;
     }
   }
-  @media (max-width: 425px) {
+  @media (max-width: 419px) {
     margin-top: ${props => (props.isError ? 0 : '15px')};
   }
 `;
