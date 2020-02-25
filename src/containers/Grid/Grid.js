@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Square from '../../components/Grid/Square';
-import SpecialSquare from '../../components/Grid/SpecialSquare';
+import TargetSquare from '../../components/Grid/TargetSquare';
 import PathSquare from '../../components/Grid/PathSquare';
 import RowContainer from '../../components/Grid/RowContainer';
 import { isEqualPositions } from '../../helpers/isEqualPositions';
@@ -9,7 +9,7 @@ import { fillSquare, clearSquare, findPath } from '../../store/actions/rootActio
 import { customBFS } from '../../helpers/customBFS';
 
 const MemoSqaure = memo(Square);
-const MemoSpecialSquare = memo(SpecialSquare);
+const MemoTargetSquare = memo(TargetSquare);
 const MemoPathSquare = memo(PathSquare);
 
 const Grid = () => {
@@ -40,10 +40,10 @@ const Grid = () => {
     let square;
     switch (true) {
       case isEqualPositions(startPosition, [x, y]):
-        square = <MemoSpecialSquare type="start" columns={columns.length} key={`${x}-${y}`} />;
+        square = <MemoTargetSquare type="start" columns={columns.length} key={`${x}-${y}`} />;
         break;
       case isEqualPositions(endPosition, [x, y]):
-        square = <MemoSpecialSquare type="end" columns={columns.length} key={`${x}-${y}`} />;
+        square = <MemoTargetSquare type="end" columns={columns.length} key={`${x}-${y}`} />;
         break;
       case !!pathSquaresList.find(pathSquare => isEqualPositions(pathSquare, [x, y])):
         square = (
