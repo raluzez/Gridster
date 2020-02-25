@@ -1,5 +1,5 @@
 # Gridster
-Telesoftas front-end assignment
+**Live** https://raluzez.github.io/Gridster
 
 Please use the React and Redux JavaScript libraries to create a UI consisting of:
 * An input labelled 'Rows' which only allows integers and max value is 20
