@@ -11,6 +11,7 @@ export default styled.button`
   background-color: #4a90e2;
   color: white;
   font-size: 17px;
+  height: 38px;
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   &&:hover {
     background-color: #76b5ff;
@@ -28,6 +29,7 @@ export default styled.button`
     margin-right: 20px;
     padding: 7.5px 14px;
     font-size: 15px;
+    height: 34px;
   }
   @media (max-width: 419px) {
     margin-top: -24px;
